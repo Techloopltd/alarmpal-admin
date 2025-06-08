@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
-import { Loader2, Activity, Lock, Mail } from 'lucide-react';
+import { Loader2, Lock, Mail } from 'lucide-react';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('admin@example.com');
@@ -43,9 +43,13 @@ const LoginPage = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.5, type: "spring", stiffness: 200 }}
-            className="mx-auto mb-6 h-16 w-16 bg-gray-900 rounded-2xl flex items-center justify-center shadow-lg"
+            className="mx-auto mb-6 h-16 w-16 bg-white rounded-2xl flex items-center justify-center shadow-lg border border-gray-100"
           >
-            <Activity className="h-8 w-8 text-white" />
+            <img 
+              src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
+              alt="MyAlarmPal Logo" 
+              className="h-10 w-10 object-contain"
+            />
           </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
@@ -53,7 +57,7 @@ const LoginPage = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="text-3xl font-bold mb-3 text-gray-900"
           >
-            AdminPro
+            MyAlarmPal
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
