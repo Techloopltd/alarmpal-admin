@@ -12,22 +12,26 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gray-50">
       <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
       
-      <div className={`transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-16'}`}>
+      <motion.div 
+        className={`transition-all duration-300 ${sidebarOpen ? 'ml-72' : 'ml-20'}`}
+        layout
+      >
         <TopNavbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
         
-        <main className="p-6">
+        <main className="p-8 min-h-screen">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
+            className="max-w-7xl mx-auto"
           >
             {children}
           </motion.div>
         </main>
-      </div>
+      </motion.div>
     </div>
   );
 };
