@@ -43,7 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
           >
             {isOpen && (
               <>
-                <div className="h-10 w-10 bg-white rounded-xl flex items-center justify-center shadow-md border border-gray-100">
+                <div className="h-10 w-10 bg-white rounded-3xl flex items-center justify-center shadow-md border border-gray-100">
                   <img 
                     src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
                     alt="MyAlarmPal Logo" 
@@ -73,7 +73,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
 
         {!isOpen && (
           <div className="flex justify-center mb-8">
-            <div className="h-10 w-10 bg-white rounded-xl flex items-center justify-center shadow-md border border-gray-100">
+            <div className="h-10 w-10 bg-white rounded-3xl flex items-center justify-center shadow-md border border-gray-100">
               <img 
                 src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
                 alt="MyAlarmPal Logo" 

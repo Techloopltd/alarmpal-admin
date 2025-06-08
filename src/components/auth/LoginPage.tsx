@@ -28,9 +28,12 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center p-4">
-      <div className="absolute inset-0 opacity-50" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f3f4f6' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-      }}></div>
+      <div 
+        className="absolute inset-0 opacity-50"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f3f4f6' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}
+      ></div>
       
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -43,7 +46,7 @@ const LoginPage = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.5, type: "spring", stiffness: 200 }}
-            className="mx-auto mb-6 h-16 w-16 bg-white rounded-2xl flex items-center justify-center shadow-lg border border-gray-100"
+            className="mx-auto mb-6 h-16 w-16 bg-white rounded-3xl flex items-center justify-center shadow-lg border border-gray-100"
           >
             <img 
               src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 

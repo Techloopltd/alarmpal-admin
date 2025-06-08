@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import StatCard from '@/components/dashboard/StatCard';
+import RevenueChart from '@/components/dashboard/RevenueChart';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { DollarSign, Users, CreditCard, TrendingUp, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { DollarSign, Users, CreditCard, TrendingUp, ArrowUpRight } from 'lucide-react';
 
 const OverviewPage = () => {
   const stats = [
@@ -107,9 +107,7 @@ const OverviewPage = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="h-64 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl flex items-center justify-center">
-                <p className="text-gray-500 font-medium">Chart Component Placeholder</p>
-              </div>
+              <RevenueChart />
             </CardContent>
           </Card>
         </motion.div>

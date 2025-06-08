@@ -7,7 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Search, Filter, Edit, Trash2, MoreHorizontal } from 'lucide-react';
+import { Search, Edit, Trash2 } from 'lucide-react';
+import AddUserDialog from '@/components/users/AddUserDialog';
 
 interface User {
   id: string;
@@ -22,8 +23,7 @@ interface User {
 const UsersPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
-
-  const users: User[] = [
+  const [users, setUsers] = useState<User[]>([
     {
       id: '1',
       name: 'John Doe',
@@ -46,7 +46,7 @@ const UsersPage = () => {
       id: '3',
       name: 'Mike Johnson',
       email: 'mike@example.com',
-      role: 'Moderator',
+      role: 'User',
       status: 'pending',
       createdAt: '2024-02-01'
     },
@@ -58,7 +58,19 @@ const UsersPage = () => {
       status: 'inactive',
       createdAt: '2024-02-05'
     }
-  ];
+  ]);
+
+  const handleAddUser = (newUser: { name: string; email: string; role: string }) => {
+    const user: User = {
+      id: (users.length + 1).toString(),
+      name: newUser.name,
+      email: newUser.email,
+      role: newUser.role,
+      status: 'active',
+      createdAt: new Date().toISOString().split('T')[0]
+    };
+    setUsers([...users, user]);
+  };
 
   const filteredUsers = users.filter(user => {
     const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -99,9 +111,7 @@ const UsersPage = () => {
                 <CardTitle>Users</CardTitle>
                 <CardDescription>A list of all users in your account</CardDescription>
               </div>
-              <Button className="bg-primary hover:bg-primary/90">
-                Add User
-              </Button>
+              <AddUserDialog onAddUser={handleAddUser} />
             </div>
           </CardHeader>
           <CardContent>
