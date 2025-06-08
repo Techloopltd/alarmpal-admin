@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/contexts/AuthContext';
-import { Menu, Bell, Search, LogOut, Settings } from 'lucide-react';
+import { Menu, Search, LogOut, Settings } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface TopNavbarProps {
   onMenuClick: () => void;
@@ -45,20 +46,11 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ onMenuClick }) => {
 
         <div className="flex items-center gap-3">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button variant="ghost" size="icon" className="relative hover:bg-gray-100 transition-colors duration-200">
-              <Bell size={20} className="text-gray-600" />
-              <motion.span 
-                className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              ></motion.span>
-            </Button>
-          </motion.div>
-
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button variant="ghost" size="icon" className="hover:bg-gray-100 transition-colors duration-200">
-              <Settings size={20} className="text-gray-600" />
-            </Button>
+            <Link to="/dashboard/settings">
+              <Button variant="ghost" size="icon" className="hover:bg-gray-100 transition-colors duration-200">
+                <Settings size={20} className="text-gray-600" />
+              </Button>
+            </Link>
           </motion.div>
 
           <div className="h-8 w-px bg-gray-200 mx-2"></div>
