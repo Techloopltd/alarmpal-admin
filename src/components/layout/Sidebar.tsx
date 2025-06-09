@@ -49,11 +49,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
           >
             {isOpen && (
               <>
-                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center">
                   <img 
                     src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
                     alt="MyAlarmPal Logo" 
-                    className="h-5 w-5 sm:h-7 sm:w-7 object-contain"
+                    className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
                   />
                 </div>
                 <div>
@@ -78,18 +78,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
         </div>
 
         {!isOpen && !isMobile && (
-          <div className="flex justify-center mb-6 sm:mb-8">
-            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
+          <div className="flex justify-center mb-8 sm:mb-10">
+            <div className="h-12 w-12 flex items-center justify-center">
               <img 
                 src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
                 alt="MyAlarmPal Logo" 
-                className="h-5 w-5 sm:h-7 sm:w-7 object-contain"
+                className="h-8 w-8 object-contain"
               />
             </div>
           </div>
         )}
 
-        <nav className="space-y-2 sm:space-y-3">
+        <nav className={`space-y-3 sm:space-y-4 ${!isOpen && !isMobile ? 'px-2' : ''}`}>
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             return (
@@ -102,17 +102,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
               >
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-3 sm:py-4 rounded-xl sm:rounded-2xl transition-all duration-300 group relative ${
+                  className={`flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-3 sm:py-4 rounded-2xl transition-all duration-300 group relative ${
                     isActive
                       ? 'bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-xl border border-gray-300'
                       : 'hover:bg-white hover:shadow-lg text-gray-700 hover:text-gray-900 border border-transparent hover:border-gray-200/50'
-                  } ${!isOpen && !isMobile ? 'justify-center' : ''}`}
+                  } ${!isOpen && !isMobile ? 'justify-center mx-0' : ''}`}
                   title={!isOpen && !isMobile ? item.label : undefined}
                 >
                   <div className={`flex-shrink-0 ${!isOpen && !isMobile ? 'flex items-center justify-center' : ''}`}>
                     <item.icon 
-                      size={20} 
-                      className={`sm:w-[22px] sm:h-[22px] transition-all duration-300 ${
+                      size={22} 
+                      className={`transition-all duration-300 ${
                         isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'
                       }`} 
                       strokeWidth={isActive ? 2 : 1.5}
