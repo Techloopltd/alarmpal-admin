@@ -49,7 +49,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       >
         <TopNavbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
         
-        <main className="p-4 sm:p-6 lg:p-8 min-h-screen">
+        <main className="p-3 sm:p-4 md:p-6 lg:p-8 min-h-screen">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

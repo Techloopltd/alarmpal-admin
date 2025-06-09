@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -88,14 +89,15 @@ const UsersPage = () => {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-3 sm:space-y-4 md:space-y-6">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
+        className="px-1 sm:px-0"
       >
-        <h1 className="text-2xl sm:text-3xl font-bold mb-2">User Management</h1>
-        <p className="text-muted-foreground text-sm sm:text-base">Manage and monitor all user accounts</p>
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">User Management</h1>
+        <p className="text-muted-foreground text-xs sm:text-sm md:text-base">Manage and monitor all user accounts</p>
       </motion.div>
 
       <motion.div
@@ -104,34 +106,34 @@ const UsersPage = () => {
         transition={{ delay: 0.2, duration: 0.5 }}
       >
         <Card className="border-0 shadow-md">
-          <CardHeader className="pb-4 sm:pb-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <CardHeader className="pb-3 sm:pb-4 md:pb-6 px-3 sm:px-4 md:px-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
               <div>
-                <CardTitle className="text-lg sm:text-xl">Users</CardTitle>
-                <CardDescription className="text-sm">A list of all users in your account</CardDescription>
+                <CardTitle className="text-base sm:text-lg md:text-xl">Users</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">A list of all users in your account</CardDescription>
               </div>
               <AddUserDialog onAddUser={handleAddUser} />
             </div>
           </CardHeader>
-          <CardContent className="px-4 sm:px-6">
-            <div className="flex flex-col gap-4 mb-6">
+          <CardContent className="px-3 sm:px-4 md:px-6">
+            <div className="flex flex-col gap-3 sm:gap-4 mb-4 sm:mb-6">
               <div className="relative flex-1">
-                <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+                <Search size={14} className="sm:w-4 sm:h-4 absolute left-2 sm:left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
                 <Input
                   placeholder="Search users..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9"
+                  className="pl-7 sm:pl-9 text-xs sm:text-sm"
                 />
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {['all', 'active', 'inactive', 'pending'].map((filter) => (
                   <Button
                     key={filter}
                     variant={selectedFilter === filter ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setSelectedFilter(filter)}
-                    className="capitalize text-xs sm:text-sm"
+                    className="capitalize text-xs h-7 sm:h-8 px-2 sm:px-3"
                   >
                     {filter}
                   </Button>
@@ -140,7 +142,7 @@ const UsersPage = () => {
             </div>
 
             {/* Mobile view */}
-            <div className="block sm:hidden space-y-4">
+            <div className="block md:hidden space-y-3">
               <AnimatePresence>
                 {filteredUsers.map((user, index) => (
                   <motion.div
@@ -149,31 +151,31 @@ const UsersPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ delay: index * 0.1, duration: 0.3 }}
-                    className="p-4 border rounded-lg bg-white shadow-sm"
+                    className="p-3 sm:p-4 border rounded-lg bg-white shadow-sm"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <Avatar className="h-10 w-10">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                      <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
                         <AvatarImage src={user.avatar} alt={user.name} />
-                        <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                        <AvatarFallback className="text-xs sm:text-sm">{user.name.charAt(0)}</AvatarFallback>
                       </Avatar>
-                      <div className="flex-1">
-                        <p className="font-medium">{user.name}</p>
-                        <p className="text-sm text-muted-foreground">{user.email}</p>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-sm sm:text-base truncate">{user.name}</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground truncate">{user.email}</p>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <div className="flex flex-wrap gap-2">
-                        <Badge variant="outline" className="text-xs">{user.role}</Badge>
-                        <Badge className={`text-xs ${getStatusColor(user.status)}`}>
+                      <div className="flex flex-wrap gap-1 sm:gap-2">
+                        <Badge variant="outline" className="text-xs h-5 sm:h-6">{user.role}</Badge>
+                        <Badge className={`text-xs h-5 sm:h-6 ${getStatusColor(user.status)}`}>
                           {user.status}
                         </Badge>
                       </div>
-                      <div className="flex gap-2">
-                        <Button variant="ghost" size="sm">
-                          <Edit size={14} />
+                      <div className="flex gap-1">
+                        <Button variant="ghost" size="sm" className="h-7 w-7 sm:h-8 sm:w-8 p-0">
+                          <Edit size={12} className="sm:w-3.5 sm:h-3.5" />
                         </Button>
-                        <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
-                          <Trash2 size={14} />
+                        <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive h-7 w-7 sm:h-8 sm:w-8 p-0">
+                          <Trash2 size={12} className="sm:w-3.5 sm:h-3.5" />
                         </Button>
                       </div>
                     </div>
@@ -186,15 +188,15 @@ const UsersPage = () => {
             </div>
 
             {/* Desktop table view */}
-            <div className="hidden sm:block rounded-lg border overflow-hidden">
+            <div className="hidden md:block rounded-lg border overflow-hidden">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>User</TableHead>
-                    <TableHead>Role</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Created</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead className="text-xs lg:text-sm">User</TableHead>
+                    <TableHead className="text-xs lg:text-sm">Role</TableHead>
+                    <TableHead className="text-xs lg:text-sm">Status</TableHead>
+                    <TableHead className="text-xs lg:text-sm">Created</TableHead>
+                    <TableHead className="text-right text-xs lg:text-sm">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -208,39 +210,39 @@ const UsersPage = () => {
                         transition={{ delay: index * 0.1, duration: 0.3 }}
                         className="hover:bg-accent/50 transition-colors duration-200"
                       >
-                        <TableCell>
-                          <div className="flex items-center gap-3">
-                            <Avatar className="h-8 w-8">
+                        <TableCell className="py-3">
+                          <div className="flex items-center gap-2 lg:gap-3">
+                            <Avatar className="h-7 w-7 lg:h-8 lg:w-8">
                               <AvatarImage src={user.avatar} alt={user.name} />
-                              <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                              <AvatarFallback className="text-xs">{user.name.charAt(0)}</AvatarFallback>
                             </Avatar>
-                            <div>
-                              <p className="font-medium">{user.name}</p>
-                              <p className="text-sm text-muted-foreground">{user.email}</p>
+                            <div className="min-w-0">
+                              <p className="font-medium text-xs lg:text-sm truncate">{user.name}</p>
+                              <p className="text-xs text-muted-foreground truncate">{user.email}</p>
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell>
-                          <Badge variant="outline">{user.role}</Badge>
+                        <TableCell className="py-3">
+                          <Badge variant="outline" className="text-xs">{user.role}</Badge>
                         </TableCell>
-                        <TableCell>
-                          <Badge className={getStatusColor(user.status)}>
+                        <TableCell className="py-3">
+                          <Badge className={`text-xs ${getStatusColor(user.status)}`}>
                             {user.status}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-muted-foreground">
+                        <TableCell className="text-muted-foreground py-3 text-xs lg:text-sm">
                           {new Date(user.createdAt).toLocaleDateString()}
                         </TableCell>
-                        <TableCell className="text-right">
-                          <div className="flex justify-end gap-2">
+                        <TableCell className="text-right py-3">
+                          <div className="flex justify-end gap-1">
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                              <Button variant="ghost" size="sm">
-                                <Edit size={16} />
+                              <Button variant="ghost" size="sm" className="h-7 w-7 lg:h-8 lg:w-8 p-0">
+                                <Edit size={14} className="lg:w-4 lg:h-4" />
                               </Button>
                             </motion.div>
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                              <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
-                                <Trash2 size={16} />
+                              <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive h-7 w-7 lg:h-8 lg:w-8 p-0">
+                                <Trash2 size={14} className="lg:w-4 lg:h-4" />
                               </Button>
                             </motion.div>
                           </div>

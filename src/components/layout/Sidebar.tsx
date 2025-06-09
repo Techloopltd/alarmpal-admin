@@ -31,8 +31,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
     <motion.div
       initial={false}
       animate={{ 
-        width: isOpen ? 300 : 80,
-        x: isMobile && !isOpen ? -300 : 0
+        width: isOpen ? 288 : 80,
+        x: isMobile && !isOpen ? -288 : 0
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className={`fixed left-0 top-0 h-full bg-gradient-to-b from-white to-gray-50 border-r border-gray-200/50 z-40 shadow-xl backdrop-blur-sm ${
@@ -49,7 +49,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
           >
             {isOpen && (
               <>
-                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
                   <img 
                     src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
                     alt="MyAlarmPal Logo" 
@@ -79,7 +79,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
 
         {!isOpen && !isMobile && (
           <div className="flex justify-center mb-6 sm:mb-8">
-            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
+            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
               <img 
                 src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
                 alt="MyAlarmPal Logo" 
@@ -106,15 +106,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
                     isActive
                       ? 'bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-xl border border-gray-300'
                       : 'hover:bg-white hover:shadow-lg text-gray-700 hover:text-gray-900 border border-transparent hover:border-gray-200/50'
-                  }`}
+                  } ${!isOpen && !isMobile ? 'justify-center' : ''}`}
+                  title={!isOpen && !isMobile ? item.label : undefined}
                 >
-                  <item.icon 
-                    size={20} 
-                    className={`sm:w-[22px] sm:h-[22px] flex-shrink-0 transition-all duration-300 ${
-                      isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'
-                    }`} 
-                    strokeWidth={isActive ? 2 : 1.5}
-                  />
+                  <div className={`flex-shrink-0 ${!isOpen && !isMobile ? 'flex items-center justify-center' : ''}`}>
+                    <item.icon 
+                      size={20} 
+                      className={`sm:w-[22px] sm:h-[22px] transition-all duration-300 ${
+                        isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'
+                      }`} 
+                      strokeWidth={isActive ? 2 : 1.5}
+                    />
+                  </div>
                   <motion.span
                     initial={false}
                     animate={{ 
