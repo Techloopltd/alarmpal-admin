@@ -89,7 +89,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
           </div>
         )}
 
-        <nav className={`space-y-3 sm:space-y-4 ${!isOpen && !isMobile ? 'px-2' : ''}`}>
+        <nav className={`space-y-3 sm:space-y-4 ${!isOpen && !isMobile ? 'px-1' : ''}`}>
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             return (
@@ -102,11 +102,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = f
               >
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-3 sm:py-4 rounded-2xl transition-all duration-300 group relative ${
-                    isActive
-                      ? 'bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-xl border border-gray-300'
-                      : 'hover:bg-white hover:shadow-lg text-gray-700 hover:text-gray-900 border border-transparent hover:border-gray-200/50'
-                  } ${!isOpen && !isMobile ? 'justify-center mx-0' : ''}`}
+                  className={`flex items-center gap-3 sm:gap-4 transition-all duration-300 group relative ${
+                    !isOpen && !isMobile 
+                      ? `w-12 h-12 rounded-full justify-center mx-auto ${
+                          isActive
+                            ? 'bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-xl'
+                            : 'hover:bg-white hover:shadow-lg text-gray-700 hover:text-gray-900 border border-transparent hover:border-gray-200/50'
+                        }`
+                      : `px-3 sm:px-4 py-3 sm:py-4 rounded-2xl ${
+                          isActive
+                            ? 'bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-xl border border-gray-300'
+                            : 'hover:bg-white hover:shadow-lg text-gray-700 hover:text-gray-900 border border-transparent hover:border-gray-200/50'
+                        }`
+                  }`}
                   title={!isOpen && !isMobile ? item.label : undefined}
                 >
                   <div className={`flex-shrink-0 ${!isOpen && !isMobile ? 'flex items-center justify-center' : ''}`}>
