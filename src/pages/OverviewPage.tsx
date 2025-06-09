@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import StatCard from '@/components/dashboard/StatCard';
@@ -49,25 +50,25 @@ const OverviewPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="space-y-8"
+      className="space-y-6 sm:space-y-8"
     >
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Dashboard Overview</h1>
-          <p className="text-gray-600">Welcome back! Here's what's happening with your business today.</p>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Dashboard Overview</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Welcome back! Here's what's happening with your business today.</p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-right"
+          className="text-left sm:text-right"
         >
           <p className="text-sm text-gray-500">Last updated</p>
-          <p className="text-lg font-semibold text-gray-900">
+          <p className="text-base sm:text-lg font-semibold text-gray-900">
             {new Date().toLocaleDateString('en-US', {
               weekday: 'long',
               year: 'numeric',
@@ -78,13 +79,13 @@ const OverviewPage = () => {
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, index) => (
           <StatCard key={stat.title} {...stat} index={index} />
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,11 +93,11 @@ const OverviewPage = () => {
           className="lg:col-span-2"
         >
           <Card className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-            <CardHeader className="pb-6">
-              <div className="flex items-center justify-between">
+            <CardHeader className="pb-4 sm:pb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <CardTitle className="text-xl font-bold text-gray-900">Revenue Analytics</CardTitle>
-                  <CardDescription className="text-gray-600 mt-1">
+                  <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">Revenue Analytics</CardTitle>
+                  <CardDescription className="text-gray-600 mt-1 text-sm">
                     Monthly revenue breakdown and trends
                   </CardDescription>
                 </div>
@@ -106,7 +107,7 @@ const OverviewPage = () => {
                 </div>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-3 sm:px-6">
               <RevenueChart />
             </CardContent>
           </Card>
@@ -119,21 +120,21 @@ const OverviewPage = () => {
         >
           <Card className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 h-full">
             <CardHeader className="pb-4">
-              <CardTitle className="text-xl font-bold text-gray-900">Recent Activity</CardTitle>
-              <CardDescription className="text-gray-600">
+              <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">Recent Activity</CardTitle>
+              <CardDescription className="text-gray-600 text-sm">
                 Latest user interactions and system events
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-3 sm:space-y-4">
               {recentActivity.map((activity, index) => (
                 <motion.div
                   key={activity.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6 + index * 0.1 }}
-                  className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-200"
+                  className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-colors duration-200"
                 >
-                  <div className={`w-3 h-3 rounded-full mt-1 ${
+                  <div className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full mt-1 ${
                     activity.type === 'success' ? 'bg-emerald-500' :
                     activity.type === 'error' ? 'bg-red-500' : 'bg-blue-500'
                   }`}></div>

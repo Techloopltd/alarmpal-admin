@@ -14,6 +14,7 @@ import {
 interface SidebarProps {
   isOpen: boolean;
   onToggle: () => void;
+  isMobile?: boolean;
 }
 
 const menuItems = [
@@ -23,18 +24,23 @@ const menuItems = [
   { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
 ];
 
-export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, isMobile = false }) => {
   const location = useLocation();
 
   return (
     <motion.div
       initial={false}
-      animate={{ width: isOpen ? 300 : 80 }}
+      animate={{ 
+        width: isOpen ? 300 : 80,
+        x: isMobile && !isOpen ? -300 : 0
+      }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed left-0 top-0 h-full bg-gradient-to-b from-white to-gray-50 border-r border-gray-200/50 z-20 shadow-xl backdrop-blur-sm"
+      className={`fixed left-0 top-0 h-full bg-gradient-to-b from-white to-gray-50 border-r border-gray-200/50 z-40 shadow-xl backdrop-blur-sm ${
+        isMobile ? 'w-72' : ''
+      }`}
     >
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-12">
+      <div className="p-4 sm:p-6">
+        <div className="flex items-center justify-between mb-8 lg:mb-12">
           <motion.div
             initial={false}
             animate={{ opacity: isOpen ? 1 : 0 }}
@@ -43,15 +49,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
           >
             {isOpen && (
               <>
-                <div className="h-12 w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
                   <img 
                     src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
                     alt="MyAlarmPal Logo" 
-                    className="h-7 w-7 object-contain"
+                    className="h-5 w-5 sm:h-7 sm:w-7 object-contain"
                   />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">MyAlarmPal</h1>
+                  <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">MyAlarmPal</h1>
                   <p className="text-xs text-gray-500 font-medium">Premium Dashboard</p>
                 </div>
               </>
@@ -59,31 +65,31 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
           </motion.div>
           <motion.button
             onClick={onToggle}
-            className="p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 ml-auto border border-gray-200/50 shadow-sm"
+            className="p-2 sm:p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 ml-auto border border-gray-200/50 shadow-sm"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             {isOpen ? (
-              <ChevronLeft size={18} className="text-gray-600" />
+              <ChevronLeft size={16} className="sm:w-[18px] sm:h-[18px] text-gray-600" />
             ) : (
-              <ChevronRight size={18} className="text-gray-600" />
+              <ChevronRight size={16} className="sm:w-[18px] sm:h-[18px] text-gray-600" />
             )}
           </motion.button>
         </div>
 
-        {!isOpen && (
-          <div className="flex justify-center mb-8">
-            <div className="h-12 w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
+        {!isOpen && !isMobile && (
+          <div className="flex justify-center mb-6 sm:mb-8">
+            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg border border-gray-200">
               <img 
                 src="/lovable-uploads/287a257b-05c1-4234-b082-59f9b40b1c08.png" 
                 alt="MyAlarmPal Logo" 
-                className="h-7 w-7 object-contain"
+                className="h-5 w-5 sm:h-7 sm:w-7 object-contain"
               />
             </div>
           </div>
         )}
 
-        <nav className="space-y-3">
+        <nav className="space-y-2 sm:space-y-3">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
             return (
@@ -96,15 +102,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
               >
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-300 group relative ${
+                  className={`flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-3 sm:py-4 rounded-xl sm:rounded-2xl transition-all duration-300 group relative ${
                     isActive
                       ? 'bg-gradient-to-r from-gray-900 to-gray-700 text-white shadow-xl border border-gray-300'
                       : 'hover:bg-white hover:shadow-lg text-gray-700 hover:text-gray-900 border border-transparent hover:border-gray-200/50'
                   }`}
                 >
                   <item.icon 
-                    size={22} 
-                    className={`flex-shrink-0 transition-all duration-300 ${
+                    size={20} 
+                    className={`sm:w-[22px] sm:h-[22px] flex-shrink-0 transition-all duration-300 ${
                       isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'
                     }`} 
                     strokeWidth={isActive ? 2 : 1.5}
@@ -117,7 +123,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
                       marginLeft: isOpen ? 0 : -16
                     }}
                     transition={{ duration: 0.2 }}
-                    className={`overflow-hidden whitespace-nowrap font-semibold ${
+                    className={`overflow-hidden whitespace-nowrap font-semibold text-sm sm:text-base ${
                       isActive ? 'text-white' : 'text-gray-700'
                     }`}
                   >
@@ -125,7 +131,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
                   </motion.span>
                   {isActive && isOpen && (
                     <motion.div
-                      className="absolute right-4 h-2 w-2 bg-white rounded-full"
+                      className="absolute right-3 sm:right-4 h-2 w-2 bg-white rounded-full"
                       layoutId="activeIndicator"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -143,11 +149,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mt-12 p-5 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200/50 shadow-sm"
+            className="mt-8 lg:mt-12 p-4 sm:p-5 bg-gradient-to-br from-gray-50 to-white rounded-xl sm:rounded-2xl border border-gray-200/50 shadow-sm"
           >
             <h3 className="text-sm font-bold text-gray-900 mb-2">Need Help?</h3>
-            <p className="text-xs text-gray-600 mb-4 leading-relaxed">Contact our support team for assistance with your premium dashboard.</p>
-            <button className="w-full text-xs bg-gradient-to-r from-gray-900 to-gray-700 text-white py-3 px-4 rounded-xl hover:from-gray-800 hover:to-gray-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
+            <p className="text-xs text-gray-600 mb-3 sm:mb-4 leading-relaxed">Contact our support team for assistance with your premium dashboard.</p>
+            <button className="w-full text-xs bg-gradient-to-r from-gray-900 to-gray-700 text-white py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg sm:rounded-xl hover:from-gray-800 hover:to-gray-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
               Get Support
             </button>
           </motion.div>
